@@ -10,8 +10,13 @@ class App extends Component {
       { id: 2, value: 0 },
       { id: 3, value: 0 },
       { id: 4, value: 0 },
+      { id: 5, value: 0 },
     ],
   };
+
+  constructor() {
+    super();
+  }
 
   handleIncrenment = (counter) => {
     const counters = [...this.state.counters];
@@ -37,9 +42,14 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar />
+        <NavBar totalCounters={this.state.counters.filter(c => c.value > 0).length}/>
         <main className='container'>
-          <Counters />
+          <Counters
+            counters={this.state.counters}
+            onReset={this.handleReset}
+            onIncrement={this.handleIncrenment}
+            onDelete={this.handleDelete}
+          />
         </main>
       </React.Fragment>
     );
